@@ -20,7 +20,7 @@ async def ping(ctx):
     await ctx.send('pong')
 
 @bot.command()
-async def help(ctx):
+async def command(ctx):
     await ctx.send('-----コマンド一覧-----\n- /ping 疎通確認を行うコマンドです \n /rect 募集を行うコマンドです。\n\t 例） /rect Apex 4 500 /rect [arg0: 募集要項] [arg1: 人数] [arg2: 募集する時間（秒）]')
 
 @bot.command()
