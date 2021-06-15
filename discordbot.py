@@ -19,7 +19,7 @@ async def on_command_error(ctx, error):
 async def ping(ctx):
     await ctx.send('pong')
 
-@client.command()
+@bot.command()
 async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
     cnt, settime = int(cnt), float(settime)
     reaction_member = [">>>"]
@@ -39,7 +39,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
 
     while len(reaction_member)-1 <= cnt:
         try:
-            reaction, user = await client.wait_for('reaction_add', timeout=settime, check=check)
+            reaction, user = await bot.wait_for('reaction_add', timeout=settime, check=check)
         except asyncio.TimeoutError:
             await ctx.send('残念、人が足りなかったようだ...')
             break
@@ -73,7 +73,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
         await msg.remove_reaction(str(reaction.emoji), user)
 
 
-client.run("YOU------TOKEN")
+bot.run("YOU------TOKEN")
 
 
 bot.run(token)
