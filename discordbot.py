@@ -20,6 +20,10 @@ async def ping(ctx):
     await ctx.send('pong')
 
 @bot.command()
+async def helloworld(ctx):
+    await ctx.send('HelloWorld. \n このボットはataoka.io#0531によって実装されました。コマンド一覧を参照する場合は  /command  と入力してください。 \n ソースコードを参照したい場合はこちらから飛んでください→https://github.com/Jp-ryos/ataokaBot')
+
+@bot.command()
 async def command(ctx):
     await ctx.send('-----コマンド一覧-----\n- /ping 疎通確認を行うコマンドです ping-pong!!!。 \n- /rect 募集を行うコマンドです。\n\t 例） /rect Apex 4 500 \n\t 　　 /rect [arg0: 募集要項] [arg1: 人数] [arg2: 募集する時間（秒）]')
 
@@ -45,7 +49,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
         try:
             reaction, user = await bot.wait_for('reaction_add', timeout=settime, check=check)
         except asyncio.TimeoutError:
-            await ctx.send('残念、人が足りなかったようだ...')
+            await ctx.send('指定の募集人数に達しませんでした。再度募集をかけてください。')
             break
         else:
             print(str(reaction.emoji))
@@ -61,7 +65,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
                     test.add_field(name=f"あと__{cnt}__人 募集中\n", value='\n'.join(reaction_member), inline=True)
                     await msg.edit(embed=test)
                     finish = discord.Embed(title=about,colour=0x1e90ff)
-                    finish.add_field(name="おっと、メンバーがきまったようだ",value='\n'.join(reaction_member), inline=True)
+                    finish.add_field(name="指定の募集人数が集まりました。",value='\n'.join(reaction_member), inline=True)
                     await ctx.send(embed=finish)
 
             elif str(reaction.emoji) == '✖':
