@@ -25,7 +25,7 @@ async def helloworld(ctx):
 
 @bot.command()
 async def command(ctx):
-    await ctx.send('-----コマンド一覧-----\n- /test_ping 疎通確認を行うコマンドです ping-pong!!!。 \n- /rect 募集を行うコマンドです。\n\t 例） /rect Apex 4 500 \n\t 　　 /rect [arg0: 募集要項] [arg1: 人数] [arg2: 募集する時間（秒）]')
+    await ctx.send('-----コマンド一覧-----\n- /test_ping 疎通確認を行うコマンドです ping-pong!!!。 \n- /rect 募集を行うコマンドです。\n サーバと同期できなくなるので何度もボタンを連打するのはお控えください。\n\t 例） /rect Apex 4 500 \n\t 　　 /rect [arg0: 募集要項] [arg1: 人数] [arg2: 募集する時間（秒）]')
 
 @bot.command()
 async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
