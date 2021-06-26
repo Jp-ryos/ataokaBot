@@ -4,7 +4,7 @@ import asyncio
 import os
 import traceback
 import datetime
-from datetime import timedelta
+from datetime import timedelta, timezone
 
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -31,13 +31,14 @@ async def command(ctx):
 
 @bot.command()
 async def rect(ctx, about = "募集\n", cnt = 4, settime = 10.0):
-    cnt, settime, now = int(cnt), float(settime * 60), datetime.datetime.now()
+    JST = timezone(timedelta(hours=+9), 'JST')
+    cnt, settime, now = int(cnt), float(settime * 60), datetime.datetime.now(JST)
     end = now + timedelta(0, settime, 0)
     reaction_member = [">>>"]
     test = discord.Embed(title=about,colour=0x1e90ff)
     test.add_field(name=f"あと{cnt}人 募集中\n", value=None, inline=True)
-    test.add_field(name=f"(募集開始：{now.strftime('%Y/%m/%d %H:%M:%S')})\n", value=None, inline=True)
-    test.add_field(name=f"(募集終了予定：{end.strftime('%Y/%m/%d %H:%M:%S')})\n", value=None, inline=True)
+    ctx.send(f"(募集開始：{now.strftime('%Y/%m/%d %H:%M:%S')})")
+    ctx.send(f"(募集終了予定：{end.strftime('%Y/%m/%d %H:%M:%S')})n")
     msg = await ctx.send(embed=test)
     #投票の欄
     await msg.add_reaction('⏫')
