@@ -37,9 +37,9 @@ async def rect(ctx, about = "募集\n", cnt = 4, settime = 10.0):
     reaction_member = [">>>"]
     test = discord.Embed(title=about,colour=0x1e90ff)
     test.add_field(name=f"あと{cnt}人 募集中\n", value=None, inline=True)
-    ctx.send(f"(募集開始：{now.strftime('%Y/%m/%d %H:%M:%S')})")
-    ctx.send(f"(募集終了予定：{end.strftime('%Y/%m/%d %H:%M:%S')})n")
     msg = await ctx.send(embed=test)
+    await ctx.send(f"(募集開始：{now.strftime('%Y/%m/%d %H:%M:%S')})")
+    await ctx.send(f"(募集終了予定：{end.strftime('%Y/%m/%d %H:%M:%S')})n")
     #投票の欄
     await msg.add_reaction('⏫')
     await msg.add_reaction('✖')
